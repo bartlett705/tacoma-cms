@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import TextBoxWithMarkdownPreview from './TextBoxWithMarkdownPreview'
+import BlogPostComposer from './BlogPostComposer'
 
 const App = (props) => {
   return (
     <div>
-      Hello World!
-    <TextBoxWithMarkdownPreview initialValue={''} />
+      <h2>Tacoma Markdown Editor</h2>
+    <BlogPostComposer initialValue={''} />
     </div>
   )
 }
