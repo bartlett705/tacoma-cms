@@ -1,0 +1,11 @@
+$bgColor: dodgerblue * 0.5;
+$textColor: white * 0.8;
+
+body {
+  background-color: $bgColor;
+  color: $textColor;
+  font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Josefin Sans', sans-serif;
+}
