@@ -1,22 +1,29 @@
 {
   "scripts": {
-    "hot:combo": "webpack-dev-server --inline --hot | nodemon server/server.js",
+    "hot:combo": "PORT=3000 webpack-dev-server --inline --hot | nodemon main.js",
     "hot": "webpack-dev-server --inline --hot",
-    "start": "nodemon server/server.js",
+    "start": "PORT=3000 nodemon main.js",
     "buildw": "webpack -w",
-    "test": "istanbul cover test/tape.js"
+    "test": "export NODE_ENV=test && mocha --timeout 8000 test/"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "body-parser": "^1.15.2",
     "css-loader": "^0.26.1",
     "eslint": "^3.10.2",
     "eslint-config-airbnb-base": "^10.0.1",
     "eslint-plugin-import": "^2.2.0",
+    "expect": "^1.20.2",
+    "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "marked": "^0.3.6",
+    "mocha": "^3.2.0",
     "node-sass": "^3.13.0",
+    "nodemon": "^1.11.0",
     "react": "^15.4.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "supertest": "^2.0.1",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   },

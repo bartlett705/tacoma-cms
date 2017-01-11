@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BlogPostViewer from './BlogPostViewer';
-
+const HOST = 'http://localhost:3000'
 class BlogPostComposer extends Component {
   constructor(props) {
     super(props)
@@ -28,6 +28,15 @@ class BlogPostComposer extends Component {
   }
   savePost(publish) {
     console.log('Sending: ', this.state.postData);
+    fetch(`${HOST}/post`, {
+      method: "POST",
+      body: {
+        ...this.state.postData,
+        publish,
+      },
+    }).then(response => {
+      if (response.ok) console.log('Server responded with OK to Post request');
+    }).catch(err => console.log('Error: ', err));
   }
   render() {
     return (
