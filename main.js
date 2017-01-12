@@ -3,10 +3,22 @@ const express = require('express');
 const bodyParser = require('body-parser').json();
 const server = express();
 const PORT = process.env.PORT || 3000;
+const HOST = 'http://localhost';
+const CORSHOST = `${HOST}:8080`;
 
-server.use(bodyParser);
 
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', CORSHOST);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
+server.use(bodyParser, allowCrossDomain);
 server.post('/post', (req, res) => {
+  console.log('req:', req);
   const newPostObj = req.body;
   console.log('New post! ', newPostObj);
 

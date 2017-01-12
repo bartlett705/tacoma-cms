@@ -27,13 +27,21 @@ class BlogPostComposer extends Component {
     });
   }
   savePost(publish) {
-    console.log('Sending: ', this.state.postData);
+    console.log('Sending: ', JSON.stringify({
+      ...this.state.postData,
+      publish,
+    }));
     fetch(`${HOST}/post`, {
       method: "POST",
-      body: {
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }),
+      mode: 'cors',
+      body: JSON.stringify({
         ...this.state.postData,
         publish,
-      },
+      }),
     }).then(response => {
       if (response.ok) console.log('Server responded with OK to Post request');
     }).catch(err => console.log('Error: ', err));
