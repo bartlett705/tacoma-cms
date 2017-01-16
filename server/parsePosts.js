@@ -3,7 +3,7 @@ const path = require('path');
 
 
 // reads all markdown files in a given directory
-// and parses them into a json.
+// and parses them into an array of post objects.
 function parsePosts() {
 
   const contentFolder = '../content/';
