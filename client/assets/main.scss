@@ -2,10 +2,43 @@ $bgColor: dodgerblue * 0.5;
 $textColor: white * 0.8;
 
 body {
+  padding: 0;
+  margin: 0;
   background-color: $bgColor;
   color: $textColor;
   font-family: 'Raleway', sans-serif;
 }
+#composer {
+  padding: 1em;
+}
+h1, h2 {
+  text-align: center;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Josefin Sans', sans-serif;
+}
+hr {
+}
+a {
+  font-weight: 700;
+  text-decoration: none;
+  color: dodgerblue * 1.5;
+}
+.footer {
+  padding: 1em 5em;
+}
+.last-link, .next-link {
+  width: 20em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+.attribution {
+  text-align: center;
+}
+.footer-flex {
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
 }

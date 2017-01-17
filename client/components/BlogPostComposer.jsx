@@ -48,7 +48,7 @@ class BlogPostComposer extends Component {
   }
   render() {
     return (
-      <div>
+      <div id='composer'>
         <form name='postComposer'>
           <input type='text' id='input-title' placeholder='title' onChange={() => this.updatePreview('title')} />
           <input type='text' id='input-date'  onChange={() => this.updatePreview('date')} />
