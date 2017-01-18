@@ -3,10 +3,6 @@ import BlogPostComposer from '../../client/components/BlogPostViewer'
 import BlogPostComposer from '../../client/components/Footer'
 import Footer from './Footer'
 
-function returnTitle(url) {
-  return /..\/\d\d\d\d\/\w+\/(.*)\.html/.exec(url)[1];
-}
-
 const App = (props) => {
   return (
     <div>
