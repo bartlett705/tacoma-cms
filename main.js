@@ -7,18 +7,16 @@ const HOST = 'http://localhost';
 const CORSHOST = `${HOST}:8080`;
 
 
-//CORS middleware
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', CORSHOST);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    next();
-}
+// CORS middleware
+const allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', CORSHOST);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+};
 
 server.use(bodyParser, allowCrossDomain);
 server.post('/post', (req, res) => {
-  console.log('req:', req);
   const newPostObj = req.body;
   console.log('New post! ', newPostObj);
 
@@ -44,6 +42,8 @@ server.get('/posts', (req, res) => {
   console.log('got');
 });
 
-server.listen(PORT, () => {
+const handle = server.listen(PORT, () => {
   console.log(`Ahmad\'s blog server listening on Port ${PORT}`);
 });
+
+module.exports = handle;
