@@ -8,7 +8,7 @@ function parsePosts() {
 
   const contentFolder = '../content/';
   const postParser = /title: (.*)\ndate: (.*)\ntags: (.*)\n---\n([^]*)/;
-  const allPosts = [];
+  let allPosts = [];
 
   fs.readdir(contentFolder, (err, files) => {
     files.forEach(file => {
