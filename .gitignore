@@ -3,3 +3,4 @@ app.config
 npm-debug.log
 content
 dist
+output
