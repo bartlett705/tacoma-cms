@@ -1,0 +1,4 @@
+-move state and instantiation of BlogPostViewer from BlogPostComposer up into Editor.
+-move savePath logic into server/main.js
+-modify server/main.js to save markdown files into `${savePath}/${title}.md`
+-write logic to assemble posts into shape more like that specified in assembler.js (to enable date range / tag-specific views) 
