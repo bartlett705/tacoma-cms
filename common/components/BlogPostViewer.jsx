@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 import marked from 'marked';
 
-const BlogPostViewer = (props) => {
-  const { date=Date.now(), title = 'Title Redacted', tags = [], body = 'Body Omitted.' } = props.blogPostData;
+const BlogPostViewer = ({ postData }) => {
+  console.log('eff u');
+  const { date=Date.now(), title = 'Title Redacted', tags = [], body = 'Body Omitted.' } = postData;
     return (
       <div className='post-container' >
 

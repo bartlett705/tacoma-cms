@@ -1,12 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
+const render = require('./renderer/renderMarkup');
+
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 // reads all markdown files in a given directory
 // and parses them into an array of post objects.
 function parsePosts() {
 
-  const contentFolder = '../content/';
+  const contentFolder = path.join(__dirname, '../content/');
   const postParser = /title: (.*)\ndate: (.*)\ntags: (.*)\n---\n([^]*)/;
   let allPosts = [];
 
@@ -20,16 +22,17 @@ function parsePosts() {
       const [junk, title, postedDate, tags, body] = postContent;
       const year = moment(postedDate).year();
       const month = months[moment(postedDate).month()];
-      const savePath = `${year}/${month}/${file}`;
+      const savePath = `${year}/${month}/${file.slice(0, file.length - 3)}.html`;
       allPosts.push({
         title,
         postedDate,
-        tags,
+        tags: tags.split(','),
         body,
         savePath,
       });
     });
     console.log(allPosts);
+    render(allPosts);
   });
 
 }

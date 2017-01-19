@@ -1,13 +1,11 @@
 import React from 'react';
-import BlogPostViewer from '../../client/components/BlogPostViewer'
+import BlogPostViewer from '../../../common/components/BlogPostViewer'
 import Footer from './Footer'
 
-require("../../common/main.scss");
-
-const App = ({ postData, lastLink, nextLink }) => (
+const PageViewer = ({ postData, lastLink, nextLink }) => (
   <div>
-    <BlogPostViewer blogPostData={postData} />
-    <Footer lastLink={'../../2015/apr/you-got-what-you-wanted.html'} nextLink={'../../2015/may/rebuild-it-all.html'} />
+    <BlogPostViewer postData={postData} />
+    <Footer lastLink={lastLink} nextLink={nextLink} />
   </div>
 );
-export default App;
+export default PageViewer;
