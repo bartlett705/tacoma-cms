@@ -44,7 +44,7 @@ module.exports = {
         'css!sass' // loaders to preprocess CSS
     )
     }, {
-      test: /\.html$/,
+      test: /\.html$|\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
       loader: 'file?name=[name].[ext]',
     }
     ],
