@@ -1,5 +1,7 @@
 $txtColor: dodgerblue * 0.5;
-$bgColor: white * 0.8;
+$bgColor: white;
+
+// $bgColor: #f0eae0;
 
 body {
   padding: 0;
@@ -30,14 +32,17 @@ p {
 .tag {
   color: $txtColor;
   padding: 0.25em 0.5em;
-  border: solid 1px $bgColor;
+  border-top: solid 1px $bgColor * 0.5;
+  border-right: solid 1px $bgColor * 0.5;
+  border-left: solid 1px $bgColor * 0.5;
   margin: 0;
-  background-color: $bgColor * 0.8;
+  background-color: $bgColor;
+  opacity: 0.9;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
 .tag:hover {
-  border-bottom: solid 1px $bgColor;
+  opacity: 1;
   background-color: $bgColor;
 }
 #post-date {
@@ -59,6 +64,7 @@ h1 {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     padding: 0.5em 0em 0.3em 0em;
+    border-left: solid 1px $bgColor * 0.5;
 }
 a {
   font-weight: 700;
