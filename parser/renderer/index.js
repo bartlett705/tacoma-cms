@@ -1,3 +1,5 @@
+// renders static HTML via React.
+
 const path = require('path');
 const fs = require('fs');
 const ReactDOMServer = require('react-dom/server');

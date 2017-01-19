@@ -5,8 +5,9 @@
     "start": "PORT=3000 nodemon main.js",
     "buildw": "webpack -w",
     "parsePosts": "babel-node parser/parsePosts.js",
-    "test:server": "export NODE_ENV=test && jest --config test/jest-server.config.js --watch",
-    "test:client": "export NODE_ENV=test && jest --config test/jest-client.config.js --watch"
+    "test:server": "export NODE_ENV=TEST && jest --config test/jest-server.config.js --watch",
+    "test:client": "export NODE_ENV=TEST && jest --config test/jest-client.config.js --watch",
+    "test": "export NODE_ENV=TEST && jest --config test/jest-integration.config.js --watch"
   },
   "dependencies": {
     "babel-cli": "^6.18.0",
