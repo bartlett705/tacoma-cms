@@ -57,7 +57,7 @@ class BlogPostComposer extends Component {
         </form>
         <button id='btn-post' onClick={() => this.savePost(false)}>Save</button>
         <button id='btn-post' onClick={() => this.savePost(true)}>Publish</button>
-        <BlogPostViewer blogPostData={this.state.postData} />
+        <BlogPostViewer postData={this.state.postData} />
       </div>
     )
   }
