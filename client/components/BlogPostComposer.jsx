@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BlogPostViewer from './BlogPostViewer';
+import BlogPostViewer from '../../common/components/BlogPostViewer';
 const HOST = 'http://localhost:3000'
 class BlogPostComposer extends Component {
   constructor(props) {

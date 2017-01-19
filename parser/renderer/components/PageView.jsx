@@ -2,6 +2,8 @@ import React from 'react';
 import BlogPostViewer from '../../client/components/BlogPostViewer'
 import Footer from './Footer'
 
+require("../../common/main.scss");
+
 const App = ({ postData, lastLink, nextLink }) => (
   <div>
     <BlogPostViewer blogPostData={postData} />

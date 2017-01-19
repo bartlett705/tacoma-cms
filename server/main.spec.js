@@ -1,4 +1,4 @@
-const server = require('../main.js');
+const server = require('./main.js');
 const supertest = require('supertest');
 const fs = require('fs');
 

@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
 
 const PATHS = {
   app: './client/index.jsx',
@@ -36,8 +38,11 @@ module.exports = {
       exclude: /node_modules/,
       loaders: ['babel-loader'],
     }, {
-      test: /\.(css|scss)$/,
-      loaders: ['style', 'css', 'sass']
+    test: /\.(scss|css)$/,
+    loader: ExtractTextPlugin.extract(
+        'style', // backup loader when not building .css file
+        'css!sass' // loaders to preprocess CSS
+    )
     }, {
       test: /\.html$/,
       loader: 'file?name=[name].[ext]',
@@ -51,12 +56,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  // plugins: [
-  //   // Auto generate our html page https://www.npmjs.com/package/html-webpack-plugin
-  //   new HtmlWebpackPlugin({
-  //     template: path.join(__dirname, 'client/index.html'),
-  //     appMountId: 'App',
-  //     title: 'Index',
-  //   })
-  // ]
+  plugins: [
+    new ExtractTextPlugin('main.css'),
+  ]
 };
