@@ -7,6 +7,7 @@ const parsePosts = require('../parser');
 
 const PORT = process.env.PORT || 3000;
 const HOST = `http://localhost:${PORT}`;
+let parsedPosts;
 
 function postPath(post) {
   return path.join(
@@ -14,11 +15,12 @@ function postPath(post) {
     `./content/${post.title.replace(/\s/g, '-').toLowerCase()}.md`
   );
 }
+
 describe('SERVER tests', () => {
   test('server should start', () => expect(typeof server.close).toBe('function'));
 
   test('should accept multiple post requests at /post', (done) => {
-    posts.forEach(post => {
+    posts.forEach((post) => {
       supertest(HOST)
       .post('/post')
       .send(post)
@@ -43,19 +45,24 @@ describe('SERVER tests', () => {
   });
 });
 
-describe('PARSER tests', () =>{
+describe('PARSER tests', () => {
   beforeAll((done) => {
-    posts = parsePosts();
+  console.log('parsing posts...');
+  parsePosts((data) => {
+    parsedPosts = data;
+    console.log('returned', parsedPosts);
     done();
   });
+});
   it('will read every markdown file in ./content', () => {
-    expect(posts.length).toBe(3);
-  })
+    console.log('expecting...', parsedPosts);
+    expect(parsedPosts .length).toBe(3);
+  });
 });
 
 afterAll(() => {
-  posts.forEach(post => {
-    fs.unlinkSync(postPath(post));
+  posts.forEach((post) => {
+    // fs.unlinkSync(postPath(post));
   });
   server.close();
 });

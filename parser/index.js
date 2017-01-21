@@ -7,7 +7,7 @@ const moment = require('moment');
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function parsePosts() {
+function parsePosts(done) {
   const contentDir = process.env.NODE_ENV === 'TEST'
     ? path.join(__dirname, '../test/content')
     : path.join(__dirname, '../content');
@@ -15,6 +15,7 @@ function parsePosts() {
   const allPosts = [];
 
   fs.readdir(contentDir, (err, files) => {
+    console.log('READ ', contentDir, 'WITH FILES: ', files);
     files.forEach((file) => {
       console.log('file:', file);
       const fileContent = fs.readFileSync(path.join(contentDir, file),
@@ -32,7 +33,9 @@ function parsePosts() {
         savePath,
       });
     });
-    return allPosts;
+    console.log('returning allPosts', allPosts);
+    done(allPosts);
+    return;
   });
 }
 

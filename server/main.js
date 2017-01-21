@@ -23,7 +23,7 @@ const allowCrossDomain = function(req, res, next) {
 server.use(bodyParser, allowCrossDomain);
 server.post('/post', (req, res) => {
   const newPostObj = req.body;
-  console.log('New post! ', newPostObj);
+  // console.log('New post! ', newPostObj);
 
   // generate filename by converting title to skeletal case
   const fileToWrite = newPostObj.title.split(' ').join('-').toLowerCase();
@@ -38,13 +38,13 @@ ${newPostObj.body}
 `;
   fs.writeFile(`${contentDir}/${fileToWrite}.md`, fileContents, (err) => {
     if (err) throw err;
-    console.log('It\'s saved to', contentDir);
+    // console.log('It\'s saved to', contentDir);
   });
   res.end();
 });
 
 server.get('/posts', (req, res) => {
-  console.log('got');
+  // console.log('got');
 });
 
 const handle = server.listen(PORT, () => {
