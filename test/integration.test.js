@@ -4,7 +4,10 @@ const path = require('path');
 const posts = require('./fixtures/posts');
 const server = require('../server/main.js');
 const parsePosts = require('../parser');
+const renderPosts = require('../parser/renderer');
 const moment = require('moment');
+const recursive = require('recursive-readdir');
+const rimraf = require('rimraf');
 
 const PORT = process.env.PORT || 3000;
 const HOST = `http://localhost:${PORT}`;
@@ -52,20 +55,38 @@ describe('SERVER tests', () => {
 
 describe('PARSER tests', () => {
   beforeAll((done) => {
-  parsePosts((data) => {
-    parsedPosts = data;
-    done();
+    parsePosts((data) => {
+      parsedPosts = data;
+      renderPosts(data);
+      done();
+    });
   });
-});
+
   it('will read every markdown file in ./content', () => {
     expect(parsedPosts.length).toBe(3);
   });
+
+  it('will render an html page for every markdown file', () => {
+    recursive('test/output', (err, files) => {
+      console.log(files);
+      expect(files.length).toBe(3);
+    });
+  });
+
+  it('will render post pages with content', () => {
+    const testFile = fs.readFileSync(postPath(posts[0]), 'utf-8');
+    expect(testFile.includes('Oceanside')).toBe(true);
+  });
 });
 
+
 afterAll(() => {
-  posts.forEach((post) => {
-    console.log('unlinking ', postPath(post));
-    fs.unlinkSync(postPath(post));
+  rimraf('./test/content', (err) => {
+    if (err) console.log(err);
+  });
+  rimraf('./test/output', (err) => {
+    if (err) console.log(err);
   });
   server.close();
+  console.log('all done!');
 });

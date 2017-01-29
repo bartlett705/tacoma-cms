@@ -6,7 +6,10 @@ const ReactDOMServer = require('react-dom/server');
 const React = require('react');
 const PageView = require('./components/PageView').default;
 const htmlTemplate = require('./components/html-template');
-const OUTPUT_DIR = require('../../blog.config.js').OUTPUT_DIR;
+
+const OUTPUT_DIR = process.env.NODE_ENV === 'TEST'
+  ? path.join(__dirname, '../../test/output')
+  : path.join(__dirname, '../../output');
 
 function ensureDirectoryExistence(filePath) {
   const dirname = path.dirname(filePath);

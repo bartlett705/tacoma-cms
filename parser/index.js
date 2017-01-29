@@ -3,7 +3,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment');
 const recursive = require('recursive-readdir');
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function parsePosts(done) {
   const contentDir = process.env.NODE_ENV === 'TEST'
@@ -18,7 +21,9 @@ function parsePosts(done) {
       const fileContent = fs.readFileSync(file, 'utf-8');
       const postContent = postParser.exec(fileContent);
       const [, title, postedDate, tags, body] = postContent;
-      const savePath = `${file.slice(0, file.length - 3)}.html`;
+      const year = moment(postedDate).year();
+      const month = months[moment(postedDate).month()];
+      const savePath = `${year}/${month}/${title.split(' ').join('-')}.html`;
       allPosts.push({
         title,
         postedDate,
