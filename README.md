@@ -2,9 +2,9 @@
 
 Tacoma consists of three distinct parts.
 
-- Post Editor and Preview: a react-driven client for editing markdown posts with a live preview.  Posts are directed to the Server.
-- Server: listens for posts and saves them in the server's filesystem based on their timestamp at the path `YYYY/MMM/post-title-in-skeletal-case.md`
-- Parser/Renderer: Reads all markdown files in a directory structure similar to the one created by the Server, renders them to static HTML using the BlogPostViewer react component, and saves that html into a target directory with the path `YYYY/MMM/post-title-in-skeletal-case.html`
+- **Post Editor and Preview:** a react-driven client for editing markdown posts with a live preview.  Posts are directed to the Server.
+- **Server:** listens for posts and saves them in the server's filesystem based on their timestamp at the path `YYYY/MMM/post-title-in-skeletal-case.md`
+- **Parser/Renderer:** Reads all markdown files in a directory structure similar to the one created by the Server, renders them to static HTML using the BlogPostViewer react component, and saves that html into a target directory with the path `YYYY/MMM/post-title-in-skeletal-case.html`
 
 # How to Use
 
@@ -15,7 +15,7 @@ Tacoma consists of three distinct parts.
 
   - `npm run hot:combo`
 
-  This will serve the Editor at localhost:8080 via webpack-dev-server, and the Server at localhost:3000 via nodemon.
+  This will serve the Editor at `localhost:8080` via `webpack-dev-server`, and the Server at `localhost:3000` via `nodemon`.
 
   __OR__
 
@@ -27,6 +27,8 @@ Tacoma consists of three distinct parts.
 # Testing
 
   `npm test` will run some basic tests on the Server and Parser via jest.
+
+# Details
 
 ## Editor
 

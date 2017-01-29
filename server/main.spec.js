@@ -9,6 +9,7 @@ test('should accept post requests at /post', (done) => {
   supertest(HOST)
     .post('/post')
     .send({
+      date: '22 Aug 2016'
       title: 'z1xy test',
     })
     .expect(200, done);

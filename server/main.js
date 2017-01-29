@@ -2,15 +2,27 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser').json();
+const moment = require('moment');
+const mkdirp = require('mkdirp');
 
 const server = express();
 const PORT = process.env.PORT || 3000;
 const HOST = 'http://localhost';
 const CORSHOST = `${HOST}:8080`;
-const contentDir = process.env.NODE_ENV === 'TEST'
+const CONTENT_DIR = process.env.NODE_ENV === 'TEST'
   ? path.join(__dirname, '../test/content')
   : path.join(__dirname, '../content');
 
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function ensureDirectoryExistence(filePath) {
+  const dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  return fs.mkdirSync(dirname);
+}
 
 // CORS middleware
 const allowCrossDomain = function(req, res, next) {
@@ -36,9 +48,13 @@ tags: ${newPostObj.tags}
 ---
 ${newPostObj.body}
 `;
-  fs.writeFile(`${contentDir}/${fileToWrite}.md`, fileContents, (err) => {
+  const year = moment(newPostObj.date).year();
+  const month = months[moment(newPostObj.date).month()];
+  const fullSavePath = path.join(CONTENT_DIR, `${year}/${month}/${fileToWrite}.md`);
+  ensureDirectoryExistence(fullSavePath);
+  fs.writeFile(fullSavePath, fileContents, (err) => {
     if (err) throw err;
-    // console.log('It\'s saved to', contentDir);
+    // console.log('It\'s saved to', `${CONTENT_DIR}/${year}/${month}/${fileToWrite}.md`);
   });
   res.end();
 });

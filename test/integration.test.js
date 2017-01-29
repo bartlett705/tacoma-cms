@@ -1,18 +1,23 @@
 const supertest = require('supertest');
 const fs = require('fs');
 const path = require('path');
-let posts = require('./fixtures/posts');
+const posts = require('./fixtures/posts');
 const server = require('../server/main.js');
 const parsePosts = require('../parser');
+const moment = require('moment');
 
 const PORT = process.env.PORT || 3000;
 const HOST = `http://localhost:${PORT}`;
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 let parsedPosts;
 
 function postPath(post) {
+  const year = moment(post.date).year();
+  const month = months[moment(post.date).month()];
   return path.join(
     __dirname,
-    `./content/${post.title.replace(/\s/g, '-').toLowerCase()}.md`
+    `./content/${year}/${month}/${post.title.replace(/\s/g, '-').toLowerCase()}.md`
   );
 }
 
@@ -47,22 +52,20 @@ describe('SERVER tests', () => {
 
 describe('PARSER tests', () => {
   beforeAll((done) => {
-  console.log('parsing posts...');
   parsePosts((data) => {
     parsedPosts = data;
-    console.log('returned', parsedPosts);
     done();
   });
 });
   it('will read every markdown file in ./content', () => {
-    console.log('expecting...', parsedPosts);
-    expect(parsedPosts .length).toBe(3);
+    expect(parsedPosts.length).toBe(3);
   });
 });
 
 afterAll(() => {
   posts.forEach((post) => {
-    // fs.unlinkSync(postPath(post));
+    console.log('unlinking ', postPath(post));
+    fs.unlinkSync(postPath(post));
   });
   server.close();
 });
